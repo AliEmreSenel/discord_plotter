@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "discord_plotter"
+version = "0.1.0"
+description = "A lightweight module to send Matplotlib figures to Discord via Webhook."
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+  {name = "Ali Emre Senel", email = "aliemre@senel.biz"}
+]
+dependencies = [
+  "requests",
+  "matplotlib",
+  "python-dotenv"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
