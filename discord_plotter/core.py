@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def send_plot(plot_object, description="Here is your plot", filename=None):
+def send_plot(plot_object, description="Here is your plot", filename=None, dpi=300):
     """
     Sends a matplotlib Figure or Animation to a Discord webhook.
 
@@ -36,7 +36,7 @@ def send_plot(plot_object, description="Here is your plot", filename=None):
         os.close(fd)
 
         try:
-            plot_object.save(temp_path, writer="pillow", fps=2)
+            plot_object.save(temp_path, writer="pillow", fps=2, dpi=dpi)
 
             with open(temp_path, "rb") as f:
                 buffer.write(f.read())
@@ -47,7 +47,7 @@ def send_plot(plot_object, description="Here is your plot", filename=None):
     elif isinstance(plot_object, Figure):
         fname = filename or "plot.png"
         mime_type = "image/png"
-        plot_object.savefig(buffer, format="png", bbox_inches="tight")
+        plot_object.savefig(buffer, format="png", bbox_inches="tight", dpi=dpi)
     else:
         raise TypeError(
             f"Expected matplotlib Figure or Animation, got {type(plot_object)}"
